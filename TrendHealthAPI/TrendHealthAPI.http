@@ -1,0 +1,32 @@
+@host = http://localhost:5192
+
+### List reminders (page 1, open only, soonest first)
+GET {{host}}/reminders?page=1&pageSize=10&status=Open&sortBy=dueDate&sortDir=asc
+Accept: application/json
+
+### Create a daily reminder
+POST {{host}}/reminders
+Content-Type: application/json
+
+{
+  "patientName": "Jane Doe",
+  "title": "Take blood pressure reading",
+  "notes": "Morning, before medication",
+  "dueDate": "2026-11-05T09:00:00Z",
+  "recurrence": "Daily"
+}
+
+### Get one reminder
+GET {{host}}/reminders/1
+
+### Complete it (creates the next occurrence for Daily/Weekly)
+POST {{host}}/reminders/1/complete
+
+### Audit trail
+GET {{host}}/reminders/1/history
+
+### Validation error example (400)
+POST {{host}}/reminders
+Content-Type: application/json
+
+{ "title": "", "recurrence": "Monthly" }

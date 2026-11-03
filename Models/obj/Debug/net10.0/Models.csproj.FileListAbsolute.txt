@@ -1,0 +1,11 @@
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\bin\Debug\net10.0\Models.deps.json
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\bin\Debug\net10.0\Models.dll
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\bin\Debug\net10.0\Models.pdb
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\Models.AssemblyInfoInputs.cache
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\Models.AssemblyInfo.cs
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\Models.csproj.CoreCompileInputs.cache
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\Models.dll
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\refint\Models.dll
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\Models.pdb
+C:\Users\Norma\TrendHealthTakeHomeTest\Models\obj\Debug\net10.0\ref\Models.dll

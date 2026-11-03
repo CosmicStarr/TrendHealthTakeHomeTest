@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/data/">
+    <Project Path="data/Data.csproj" />
+  </Folder>
+  <Project Path="Models/Models.csproj" />
+  <Project Path="TrendHealthAPI.Tests/TrendHealthAPI.Tests.csproj" />
+  <Project Path="TrendHealthAPI/TrendHealthAPI.csproj" />
+</Solution>
