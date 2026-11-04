@@ -23,9 +23,7 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
         _context.Dispose();
     }
 
-    /// <summary>
-    /// Returns a cached <see cref="Repository{T}"/> for this entity type, creating it on first use.
-    /// </summary>
+ 
     public IRepository<T> Repository<T>() where T : class
     {
         _repo ??= [];
