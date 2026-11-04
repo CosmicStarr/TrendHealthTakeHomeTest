@@ -1,0 +1,97 @@
+<section class="card">
+  <header class="list-header">
+    <h2>Reminders</h2>
+    <div class="controls">
+      <label>
+        Status
+        <select [value]="status()" (change)="onStatusChange($any($event.target).value)">
+          <option value="">All</option>
+          <option value="Open">Open</option>
+          <option value="Done">Done</option>
+        </select>
+      </label>
+      <label>
+        Sort
+        <select [value]="sort()" (change)="onSortChange($any($event.target).value)">
+          <option value="dueDate:asc">Due Date (soonest first)</option>
+          <option value="dueDate:desc">Due Date (latest first)</option>
+          <option value="createdAt:desc">Created (newest first)</option>
+          <option value="createdAt:asc">Created (oldest first)</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  @if (error(); as message) {
+    <p class="alert error" role="alert">
+      {{ message }} <button type="button" class="link" (click)="load()">Retry</button>
+    </p>
+  }
+
+  <div class="table-wrap" [class.is-loading]="loading()" [attr.aria-busy]="loading()">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Patient</th>
+          <th>Due</th>
+          <th>Status</th>
+          <th>Repeats</th>
+          <th><span class="visually-hidden">Actions</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (r of result()?.items ?? []; track r.id) {
+          <tr [class.highlight]="r.id === highlightId()">
+            <td>{{ r.title }}</td>
+            <td>{{ r.patientName }}</td>
+            <td>{{ r.dueDate | date: 'medium' }}</td>
+            <td>
+              <span class="badge" [class.done]="r.status === 'Done'">{{ r.status }}</span>
+            </td>
+            <td>{{ r.isRecurring ? r.recurrence : '—' }}</td>
+            <td class="actions">
+              @if (r.status === 'Open') {
+                <button
+                  type="button"
+                  class="secondary"
+                  [disabled]="completingId() === r.id"
+                  (click)="complete(r)"
+                >
+                  {{ completingId() === r.id ? 'Saving…' : 'Mark done' }}
+                </button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty">
+              {{ loading() ? 'Loading…' : 'No reminders match this filter.' }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (result(); as r) {
+    <nav class="pager" aria-label="Pagination">
+      <button
+        type="button"
+        [disabled]="!r.hasPreviousPage || loading()"
+        (click)="goToPage(r.page - 1)"
+      >
+        ← Previous
+      </button>
+      <span>
+        Page {{ r.totalPages === 0 ? 0 : r.page }} of {{ r.totalPages }} · {{ r.totalCount }} total
+        @if (loading()) {
+          · Loading…
+        }
+      </span>
+      <button type="button" [disabled]="!r.hasNextPage || loading()" (click)="goToPage(r.page + 1)">
+        Next →
+      </button>
+    </nav>
+  }
+</section>

@@ -1,0 +1,5 @@
+<main class="page">
+  <h1>Patient reminders</h1>
+  <app-reminder-form (created)="list.showCreated($event)" />
+  <app-reminder-list #list />
+</main>

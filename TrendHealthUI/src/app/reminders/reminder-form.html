@@ -1,0 +1,88 @@
+<section class="card">
+  <h2>New reminder</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="grid">
+      <label class="field">
+        <span>Patient name *</span>
+        <input formControlName="patientName" autocomplete="off" />
+        @if (showErrors('patientName')) {
+          <small class="field-error">
+            @if (form.controls.patientName.hasError('required')) {
+              Patient name is required.
+            }
+            @if (form.controls.patientName.hasError('maxlength')) {
+              Keep it under 200 characters.
+            }
+          </small>
+        }
+        @for (msg of serverErrorsFor('patientName'); track msg) {
+          <small class="field-error">{{ msg }}</small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Title *</span>
+        <input formControlName="title" autocomplete="off" />
+        @if (showErrors('title')) {
+          <small class="field-error">
+            @if (form.controls.title.hasError('required')) {
+              Title is required.
+            }
+            @if (form.controls.title.hasError('maxlength')) {
+              Keep it under 200 characters.
+            }
+          </small>
+        }
+        @for (msg of serverErrorsFor('title'); track msg) {
+          <small class="field-error">{{ msg }}</small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Due *</span>
+        <input type="datetime-local" formControlName="dueDate" />
+        @if (showErrors('dueDate')) {
+          <small class="field-error">Due date is required.</small>
+        }
+        @for (msg of serverErrorsFor('dueDate'); track msg) {
+          <small class="field-error">{{ msg }}</small>
+        }
+      </label>
+
+      <label class="field">
+        <span>Repeats</span>
+        <select formControlName="recurrence">
+          @for (r of recurrences; track r) {
+            <option [value]="r">{{ r === 'None' ? 'Does not repeat' : r }}</option>
+          }
+        </select>
+        @for (msg of serverErrorsFor('recurrence'); track msg) {
+          <small class="field-error">{{ msg }}</small>
+        }
+      </label>
+
+      <label class="field full">
+        <span>Notes</span>
+        <textarea formControlName="notes" rows="3"></textarea>
+        @if (showErrors('notes')) {
+          <small class="field-error">Keep notes under 2000 characters.</small>
+        }
+        @for (msg of serverErrorsFor('notes'); track msg) {
+          <small class="field-error">{{ msg }}</small>
+        }
+      </label>
+    </div>
+
+    @if (error(); as message) {
+      <p class="alert error" role="alert">{{ message }}</p>
+    }
+    @if (lastCreated(); as r) {
+      <p class="alert success" role="status">Created “{{ r.title }}”.</p>
+    }
+
+    <button type="submit" [disabled]="submitting()">
+      {{ submitting() ? 'Saving…' : 'Create reminder' }}
+    </button>
+  </form>
+</section>
